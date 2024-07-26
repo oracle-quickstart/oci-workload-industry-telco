@@ -17,7 +17,7 @@ locals {
 }
 
 module "lz_dynamic_groups" {
-  source = "github.com/oracle-quickstart/terraform-oci-cis-landing-zone-iam//dynamic-groups?ref=v0.1.7"
+  source = "github.com/oci-landing-zones/terraform-oci-modules-iam//dynamic-groups?ref=v0.1.7"
   providers  = { oci = oci.home }
   tenancy_ocid = var.tenancy_ocid
   dynamic_groups_configuration = var.extend_landing_zone_to_new_region == false ? (local.custom_dynamic_groups_configuration != null ? local.custom_dynamic_groups_configuration : local.dynamic_groups_configuration) : local.empty_dynamic_groups_configuration
@@ -47,7 +47,7 @@ locals {
   security_functions_dynamic_group = length(trimspace(var.existing_security_fun_dyn_group_name)) == 0 ? {
     (local.security_functions_dynamic_group_key) = {
       name          = local.provided_security_functions_dynamic_group_name  
-      description   = "CIS Landing Zone dynamic group for security functions execution."
+      description   = "OCI Landing Zone dynamic group for security functions execution."
       matching_rule = "ALL {resource.type = 'fnfunc',resource.compartment.id = '${local.security_compartment_id}'}"
       defined_tags  = local.dynamic_groups_defined_tags
       freeform_tags = local.dynamic_groups_freeform_tags
@@ -64,7 +64,7 @@ locals {
   appdev_functions_dynamic_group = length(trimspace(var.existing_appdev_fun_dyn_group_name)) == 0 ? {
     (local.appdev_functions_dynamic_group_key) = {
       name          = local.provided_appdev_functions_dynamic_group_name   
-      description   = "CIS Landing Zone dynamic group for application functions execution."
+      description   = "OCI Landing Zone dynamic group for application functions execution."
       matching_rule = "ALL {resource.type = 'fnfunc',resource.compartment.id = '${local.appdev_compartment_id}'}"
       defined_tags  = local.dynamic_groups_defined_tags
       freeform_tags = local.dynamic_groups_freeform_tags
@@ -81,7 +81,7 @@ locals {
   appdev_computeagent_dynamic_group = length(trimspace(var.existing_compute_agent_dyn_group_name)) == 0 ? {
     (local.appdev_computeagent_dynamic_group_key) = {
       name          = local.provided_appdev_computeagent_dynamic_group_name  
-      description   = "CIS Landing Zone dynamic group for Compute Agent plugin execution."
+      description   = "OCI Landing Zone dynamic group for Compute Agent plugin execution."
       matching_rule = "ALL {resource.type = 'managementagent',resource.compartment.id = '${local.appdev_compartment_id}'}"
       defined_tags  = local.dynamic_groups_defined_tags
       freeform_tags = local.dynamic_groups_freeform_tags
@@ -98,7 +98,7 @@ locals {
   database_kms_dynamic_group = length(trimspace(var.existing_database_kms_dyn_group_name)) == 0 ? {
     (local.database_kms_dynamic_group_key) = {
       name          = local.provided_database_kms_dynamic_group_name  
-      description   = "CIS Landing Zone dynamic group for databases accessing Key Management service (aka Vault service)."
+      description   = "OCI Landing Zone dynamic group for databases accessing Key Management service (aka Vault service)."
       matching_rule = "ALL {resource.compartment.id = '${local.database_compartment_id}'}"
       defined_tags  = local.dynamic_groups_defined_tags
       freeform_tags = local.dynamic_groups_freeform_tags

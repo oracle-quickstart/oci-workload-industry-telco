@@ -19,14 +19,14 @@ locals {
 
 module "lz_top_compartment" {
   count     = var.extend_landing_zone_to_new_region == false && var.use_enclosing_compartment == true && var.existing_enclosing_compartment_ocid == null ? 1 : 0
-  source = "github.com/oracle-quickstart/terraform-oci-cis-landing-zone-iam//compartments?ref=v0.1.7"
+  source = "github.com/oci-landing-zones/terraform-oci-modules-iam//compartments?ref=v0.1.7"
   providers = { oci = oci.home }
   tenancy_ocid = var.tenancy_ocid
   compartments_configuration = local.enclosing_compartment_configuration
 }
 
 module "lz_compartments" {
-  source = "github.com/oracle-quickstart/terraform-oci-cis-landing-zone-iam//compartments?ref=v0.1.7"
+  source = "github.com/oci-landing-zones/terraform-oci-modules-iam//compartments?ref=v0.1.7"
   providers = { oci = oci.home }
   tenancy_ocid = var.tenancy_ocid
   compartments_configuration = var.extend_landing_zone_to_new_region == false ? local.enclosed_compartments_configuration : local.empty_compartments_configuration
@@ -64,7 +64,7 @@ locals {
   enclosing_cmp = local.enable_enclosing_compartment ? { 
     (local.enclosing_compartment_key) : { 
       name : local.provided_enclosing_compartment_name, 
-      description : "CIS Landing Zone enclosing compartment", 
+      description : "OCI Landing Zone enclosing compartment",
       defined_tags : local.cmps_defined_tags, 
       freeform_tags : local.cmps_freeform_tags,
       children : {}
@@ -82,7 +82,7 @@ locals {
   network_cmp = local.enable_network_compartment ? {
     (local.network_compartment_key) : { 
       name : local.provided_network_compartment_name, 
-      description : "CIS Landing Zone compartment for all network related resources: VCNs, subnets, network gateways, security lists, NSGs, load balancers, VNICs, and others.", 
+      description : "OCI Landing Zone compartment for all network related resources: VCNs, subnets, network gateways, security lists, NSGs, load balancers, VNICs, and others.",
       defined_tags : local.cmps_defined_tags, 
       freeform_tags : local.cmps_freeform_tags,
       children : {}
@@ -96,7 +96,7 @@ locals {
   security_cmp = local.enable_security_compartment ? {
     (local.security_compartment_key) : { 
       name : local.provided_security_compartment_name, 
-      description : "CIS Landing Zone compartment for all security related resources: vaults, topics, notifications, logging, scanning, and others.", 
+      description : "OCI Landing Zone compartment for all security related resources: vaults, topics, notifications, logging, scanning, and others.",
       defined_tags : local.cmps_defined_tags,
       freeform_tags : local.cmps_freeform_tags,
       children : {}
@@ -110,7 +110,7 @@ locals {
   appdev_cmp = local.enable_appdev_compartment ? {
     (local.appdev_compartment_key) : { 
       name : local.provided_appdev_compartment_name, 
-      description : "CIS Landing Zone compartment for all resources related to application development: compute instances, storage, functions, OKE, API Gateway, streaming, and others.", 
+      description : "OCI Landing Zone compartment for all resources related to application development: compute instances, storage, functions, OKE, API Gateway, streaming, and others.",
       defined_tags : local.cmps_defined_tags,
       freeform_tags : local.cmps_freeform_tags,
       children : {}
@@ -124,7 +124,7 @@ locals {
   database_cmp = local.enable_database_compartment ? {
     (local.database_compartment_key) : { 
       name : local.provided_database_compartment_name, 
-      description : "CIS Landing Zone compartment for all database related resources.", 
+      description : "OCI Landing Zone compartment for all database related resources.",
       defined_tags : local.cmps_defined_tags,
       freeform_tags : local.cmps_freeform_tags,
       children : {}
@@ -138,7 +138,7 @@ locals {
   exainfra_cmp = local.enable_exainfra_compartment ? {
     (local.exainfra_compartment_key) : { 
       name : local.provided_exainfra_compartment_name, 
-      description : "CIS Landing Zone compartment for Exadata Cloud Service infrastructure.", 
+      description : "OCI Landing Zone compartment for Exadata Cloud Service infrastructure.",
       defined_tags : local.cmps_defined_tags,
       freeform_tags : local.cmps_freeform_tags,
       children : {}

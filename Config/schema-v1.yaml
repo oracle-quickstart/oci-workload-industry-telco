@@ -2,8 +2,8 @@
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
 
 title: "OCI Telco Landing Zone Quick Start (Beta)"
-stackDescription: "This stack deploys a beta version of the OCI Telco Landing Zone Quick Start, a fully operational tenancy designed to support telco workloads on OCI, combined with the recommendations of CIS Foundations Benchmark for OCI and OCI architecture best practices. For details, please see https://github.com/oracle-quickstart/oci-workload-industry-telco."
-description: "This stack deploys a beta version of the OCI Telco Landing Zone Quick Start, a fully operational tenancy designed to support telco workloads on OCI, combined with the recommendations of CIS Foundations Benchmark for OCI and OCI architecture best practices. For details, please see <a href=\"https://github.com/oracle-quickstart/oci-workload-industry-telco\">OCI Telco Landing Zone Quick Start</a>."
+stackDescription: "This stack deploys a beta version of the OCI Telco Landing Zone Quick Start, a fully operational tenancy designed to support telco workloads on OCI, combined with the recommendations of CIS Foundations Benchmark for OCI and OCI architecture best practices. For details, please see https://github.com/oci-landing-zones/oci-workload-industry-telco."
+description: "This stack deploys a beta version of the OCI Telco Landing Zone Quick Start, a fully operational tenancy designed to support telco workloads on OCI, combined with the recommendations of CIS Foundations Benchmark for OCI and OCI architecture best practices. For details, please see <a href=\"https://github.com/oci-landing-zones/oci-workload-industry-telco\">OCI Telco Landing Zone Quick Start</a>."
 schemaVersion: 1.0.0
 version: "1.0.0"
 locale: "en"
@@ -163,7 +163,7 @@ variables:
   env_advanced_options:
     type: boolean
     title: "Advanced Options"
-    description: "Advanced options for IAM. For details please see <a href=\"https://github.com/oracle-quickstart/oci-cis-landingzone-quickstart/blob/main/VARIABLES.md\">VARIABLES.md</a>."
+    description: "Advanced options for IAM. For details please see <a href=\"https://github.com/oci-landing-zones/oci-landingzone-core/blob/main/VARIABLES.md\">VARIABLES.md</a>."
     default: false
     
   service_label:
@@ -266,7 +266,7 @@ variables:
   enable_template_policies:
     type: boolean
     title: "Enable template policies?"
-    description: "Whether policies should be created based on metadata associated to compartments. This is an alternative way of managing policies, enabled by the <a href=\"https://github.com/oracle-quickstart/terraform-oci-cis-landing-zone-iam/tree/main/policies\">CIS Landing Zone standalone IAM policy module</a>. When set to true, the grants to resources belonging to a specific compartment are combined into a single policy that is attached to the compartment itself. This differs from the default approach, where grants are combined per grantee and attached to the enclosing compartment."
+    description: "Whether policies should be created based on metadata associated to compartments. This is an alternative way of managing policies, enabled by the <a href=\"https://github.com/oci-landing-zones/terraform-oci-modules-iam/tree/main/policies\">CIS Landing Zone standalone IAM policy module</a>. When set to true, the grants to resources belonging to a specific compartment are combined into a single policy that is attached to the compartment itself. This differs from the default approach, where grants are combined per grantee and attached to the enclosing compartment."
     default: false
     visible: env_advanced_options  
 
@@ -393,7 +393,7 @@ variables:
   net_advanced_options:
     type: boolean
     title: "Advanced Options"
-    description: "Advanced options for Networking. For details please see <a href=\"https://github.com/oracle-quickstart/oci-cis-landingzone-quickstart/blob/main/VARIABLES.md\">VARIABLES.md</a>."
+    description: "Advanced options for Networking. For details please see <a href=\"https://github.com/oci-landing-zones/oci-landingzone-core/blob/main/VARIABLES.md\">VARIABLES.md</a>."
     default: false
     visible: false
       

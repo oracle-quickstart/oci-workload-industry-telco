@@ -145,7 +145,7 @@ The OKE cluster deployed by the Landing Zone can be configured according to the 
 The Landing Zone can be deployed using Oracle Resource Manager.
 
 To deploy the Landing Zone, click the following button:
-[![Deploy_To_OCI](images/DeployToOCI.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-quickstart/oci-workload-industry-telco/archive/main.zip)<br>
+[![Deploy_To_OCI](images/DeployToOCI.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oci-landing-zones/oci-workload-industry-telco/archive/main.zip)<br>
 *If you are logged into your OCI tenancy in the Commercial Realm (OC1), the button will take you directly to OCI Resource Manager where you can proceed to deploy. If you are not logged, the button takes you to Oracle Cloud initial page where you must enter your tenancy name and login to OCI.*
 <br>
 
@@ -162,12 +162,12 @@ For instructions on how to deploy the landing zone: [Deployment](DEPLOYMENT.md)
 ## <a name="modules"></a>CIS OCI Foundations Benchmark Modules Collection
 
 This repository uses a broader collection of repositories containing modules that help customers align their OCI implementations with the CIS OCI Foundations Benchmark recommendations:
-- [Identity & Access Management](https://github.com/oracle-quickstart/terraform-oci-cis-landing-zone-iam)
-- [Networking](https://github.com/oracle-quickstart/terraform-oci-cis-landing-zone-networking)
-- [Governance](https://github.com/oracle-quickstart/terraform-oci-cis-landing-zone-governance)
-- [Security](https://github.com/oracle-quickstart/terraform-oci-cis-landing-zone-security)
-- [Observability & Monitoring](https://github.com/oracle-quickstart/terraform-oci-cis-landing-zone-observability)
-- [Secure Workloads](https://github.com/oracle-quickstart/terraform-oci-secure-workloads)
+- [Identity & Access Management](https://github.com/oci-landing-zones/terraform-oci-modules-iam)
+- [Networking](https://github.com/oci-landing-zones/terraform-oci-modules-networking)
+- [Governance](https://github.com/oci-landing-zones/terraform-oci-modules-governance)
+- [Security](https://github.com/oci-landing-zones/terraform-oci-modules-security)
+- [Observability & Monitoring](https://github.com/oci-landing-zones/terraform-oci-modules-observability)
+- [Secure Workloads](https://github.com/oci-landing-zones/terraform-oci-modules-workloads)
 
 The modules in this collection are designed for flexibility, are straightforward to use, and enforce CIS OCI Foundations Benchmark recommendations when possible.
 

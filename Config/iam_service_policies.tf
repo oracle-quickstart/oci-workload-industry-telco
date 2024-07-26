@@ -12,7 +12,7 @@ locals {
 module "lz_services_policy" {
   depends_on = [null_resource.wait_on_compartments]
   count = var.extend_landing_zone_to_new_region == false && var.enable_template_policies == false && local.use_existing_root_cmp_grants == false ? 1 : 0
-  source = "github.com/oracle-quickstart/terraform-oci-cis-landing-zone-iam//policies?ref=v0.1.7"
+  source = "github.com/oci-landing-zones/terraform-oci-modules-iam//policies?ref=v0.1.7"
   providers = { oci = oci.home }
   tenancy_ocid = var.tenancy_ocid
   policies_configuration = local.services_policies_configuration
@@ -21,7 +21,7 @@ module "lz_services_policy" {
 module "lz_oke_clusters_policy" {
   depends_on = [null_resource.wait_on_compartments]
   count = var.extend_landing_zone_to_new_region == false && var.enable_template_policies == false ? 1 : 0
-  source = "github.com/oracle-quickstart/terraform-oci-cis-landing-zone-iam//policies?ref=v0.1.7"
+  source = "github.com/oci-landing-zones/terraform-oci-modules-iam//policies?ref=v0.1.7"
   providers = { oci = oci.home }
   tenancy_ocid = var.tenancy_ocid
   policies_configuration = local.oke_clusters_policy_configuration
@@ -58,7 +58,7 @@ locals {
     ("${var.service_label}-services-policy") : {
       compartment_ocid = var.tenancy_ocid
       name             = "${var.service_label}-services-policy"
-      description      = "CIS Landing Zone policy for OCI services."
+      description      = "OCI Landing Zone policy for OCI services."
       statements       = concat(local.cloud_guard_statements, local.vss_statements, local.os_mgmt_statements, local.keys_access_statements)
       defined_tags     = local.service_policy_defined_tags
       freeform_tags    = local.service_policy_freeform_tags
@@ -71,7 +71,7 @@ locals {
   }
 
   # Grants allowing OKE clusters to use Native Pod Networking (NPN) and to use network resources in the Network compartment.
-  # In CIS Landing Zone, OKE clusters are defined in the AppDev compartment, while the network resources are defined in the Network compartment.
+  # In OCI Landing Zone, OKE clusters are defined in the AppDev compartment, while the network resources are defined in the Network compartment.
   # Reference: https://docs.oracle.com/en-us/iaas/Content/ContEng/Concepts/contengpodnetworking_topic-OCI_CNI_plugin.htm
   oke_clusters_statements = ["allow any-user to manage instances in compartment ${local.appdev_compartment_name} where all { request.principal.type = 'cluster', request.principal.compartment.id = '${local.appdev_compartment_id}' }",
                             "allow any-user to use private-ips in compartment ${local.network_compartment_name} where all { request.principal.type = 'cluster', request.principal.compartment.id = '${local.appdev_compartment_id}' }",

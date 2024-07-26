@@ -33,14 +33,14 @@ resource "local_file" "cloud_init_cpu_hp2" {
 
 module "oke_flannel" {
   depends_on = [module.terraform_oci_networking_flannel,module.terraform_oci_networking_native]
-  source                 = "github.com/oracle-quickstart/terraform-oci-secure-workloads.git//cis-oke?ref=issue-523-rms"
+  source                 = "github.com/oci-landing-zones/terraform-oci-modules-workloads.git//cis-oke?ref=issue-523-rms"
   count = var.cni_type == "flannel" ? 1 : 0
   clusters_configuration = local.clusters_configuration_flannel
   workers_configuration  = local.workers_configuration_flannel
 }
 module "oke_native" {
   depends_on = [module.terraform_oci_networking_native,module.terraform_oci_networking_flannel]
-  source                 = "github.com/oracle-quickstart/terraform-oci-secure-workloads.git//cis-oke?ref=issue-523-rms"
+  source                 = "github.com/oci-landing-zones/terraform-oci-modules-workloads.git//cis-oke?ref=issue-523-rms"
   count = var.cni_type == "native" ? 1 : 0
   clusters_configuration = local.clusters_configuration_native
   workers_configuration  = local.workers_configuration_native
@@ -49,7 +49,7 @@ module "oke_native" {
 
 module "operator_instance" {
   
-  source = "github.com/oracle-quickstart/terraform-oci-secure-workloads.git//cis-compute-storage?ref=issue-523-rms"
+  source = "github.com/oci-landing-zones/terraform-oci-modules-workloads.git//cis-compute-storage?ref=issue-523-rms"
   providers = {
     oci                                  = oci
     oci.block_volumes_replication_region = oci.block_volumes_replication_region
@@ -59,28 +59,28 @@ module "operator_instance" {
 
 module "bastion" {
   depends_on = [module.oke_flannel,module.oke_native]
-  source                 = "github.com/oracle-quickstart/terraform-oci-cis-landing-zone-security.git//bastion?ref=release-0.1.5-rms"
+  source                 = "github.com/oci-landing-zones/terraform-oci-modules-security.git//bastion?ref=release-0.1.5-rms"
   bastions_configuration = local.bastions_configuration
   sessions_configuration = local.sessions_configuration
   instances_dependency   = module.operator_instance.instances
 }
 
 module "operator_dynamic_group" {
-  source = "github.com/oracle-quickstart/terraform-oci-cis-landing-zone-iam//dynamic-groups?ref=v0.2.0"
+  source = "github.com/oci-landing-zones/terraform-oci-modules-iam//dynamic-groups?ref=v0.2.0"
   providers  = { oci = oci.home }
   tenancy_ocid = var.tenancy_ocid
   dynamic_groups_configuration = local.dynamic_groups_configuration_oke
 }
 
 module "operator_policy" {
-  source = "github.com/oracle-quickstart/terraform-oci-cis-landing-zone-iam//policies?ref=v0.2.0"
+  source = "github.com/oci-landing-zones/terraform-oci-modules-iam//policies?ref=v0.2.0"
   providers  = { oci = oci.home }
   tenancy_ocid = var.tenancy_ocid
   policies_configuration = local.policies_configuration_oke
 } 
 
 module "dns_dynamic_group" {
-  source = "github.com/oracle-quickstart/terraform-oci-cis-landing-zone-iam//dynamic-groups?ref=v0.2.0"
+  source = "github.com/oci-landing-zones/terraform-oci-modules-iam//dynamic-groups?ref=v0.2.0"
   providers  = { oci = oci.home }
   tenancy_ocid = var.tenancy_ocid
   dynamic_groups_configuration = local.dynamic_groups_configuration_dns
@@ -88,7 +88,7 @@ module "dns_dynamic_group" {
 
 module "dns_policy" {
   depends_on = [module.oke_flannel,module.oke_native]
-  source = "github.com/oracle-quickstart/terraform-oci-cis-landing-zone-iam//policies?ref=v0.2.0"
+  source = "github.com/oci-landing-zones/terraform-oci-modules-iam//policies?ref=v0.2.0"
   providers  = { oci = oci.home }
   tenancy_ocid = var.tenancy_ocid
   policies_configuration = local.policies_configuration_dns

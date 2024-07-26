@@ -53,7 +53,7 @@ locals {
 
 
 module "lz_scanning" {
-  source = "github.com/oracle-quickstart/terraform-oci-cis-landing-zone-security//vss?ref=release-0.1.5-rms"
+  source = "github.com/oci-landing-zones/terraform-oci-modules-security//vss?ref=release-0.1.5-rms"
   depends_on = [null_resource.wait_on_services_policy]
   count      = var.vss_create ? 1 : 0
   scanning_configuration = local.scanning_configuration

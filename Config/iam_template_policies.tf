@@ -2,7 +2,7 @@
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
 
 #-- This file supports the creation of policies based on metadata associated with compartments.
-#-- This functionality is supported by the policy module in https://github.com/oracle-quickstart/terraform-oci-cis-landing-zone-iam/tree/main/policies
+#-- This functionality is supported by the policy module in https://github.com/oci-landing-zones/terraform-oci-modules-iam/tree/main/policies
 #-- The default approach is using the supplied policies, defined in iam_policies.tf file.
 #-- For using tag based policies, set variable enable_template_policies to true.
 
@@ -18,7 +18,7 @@ locals {
 module "lz_template_policies" {
   depends_on = [module.lz_top_compartment, module.lz_compartments, module.lz_groups, module.lz_dynamic_groups]
   count = var.extend_landing_zone_to_new_region == false && var.enable_template_policies == true ? 1 : 0
-  source = "github.com/oracle-quickstart/terraform-oci-cis-landing-zone-iam//policies?ref=v0.1.8"
+  source = "github.com/oci-landing-zones/terraform-oci-modules-iam//policies?ref=v0.1.8"
   providers = { oci = oci.home }
   tenancy_ocid = var.tenancy_ocid
   policies_configuration = local.template_policies_configuration

@@ -36,7 +36,7 @@ module "lz_security_zones" {
   depends_on = [
     module.lz_compartments
   ]
-    source = "github.com/oracle-quickstart/terraform-oci-cis-landing-zone-security//security-zones?ref=release-0.1.4"
+    source = "github.com/oci-landing-zones/terraform-oci-modules-security//security-zones?ref=release-0.1.4"
   security_zones_configuration = local.security_zones_configuration
 }
 
